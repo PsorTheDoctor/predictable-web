@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <p><a href="/">Back</a></p>
+
+    <p>Enter your e-mail:</p>
+    <input type="email" name="email-exit" id="email-exit" />
+    <input type="submit" value="Submit" onclick="deleteSubscriber()" />
+{% endblock %}
