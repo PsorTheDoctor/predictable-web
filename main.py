@@ -14,5 +14,10 @@ def admin():
     return render_template('admin.html')
 
 
+@app.route('/exit')
+def unsubscribe():
+    return render_template('exit.html')
+
+
 if __name__ == '__main__':
     app.run(port=5001, use_reloader=True, debug=True)

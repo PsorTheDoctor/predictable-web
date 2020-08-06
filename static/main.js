@@ -60,8 +60,16 @@ async function postSubscriber() {
     alert('You have been enrolled successfully!');
 }
 
-function deleteSubscriber() {
+async function deleteSubscriber() {
+    let email = document.getElementById('email-exit').value;
+    const options = {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/subscribers/' + email, options);
+    let data = await res.json();
 
+    alert('You turned newsletter off successfully!');
 }
 
 async function getPastPrice(_currency, dayShift) {
