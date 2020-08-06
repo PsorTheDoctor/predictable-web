@@ -46,6 +46,18 @@ async function deleteSubscriber() {
     alert('You turned newsletter off successfully!');
 }
 
+async function sendConfirmationMail() {
+    let email = document.getElementById('email-confirm').value;
+    let code = 123456;
+
+    const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/mail/' + email + '&' + code, options);
+    let data = await res.json();
+}
+
 async function getPastPrice(_currency, dayShift) {
     let _date = getFormattedDate(dayShift);
     const options = {

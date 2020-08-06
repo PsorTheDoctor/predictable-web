@@ -4,12 +4,33 @@
 <div class="body">
     {% block cover %}
     <div class="cover">
-        <h1>predictable</h1>
+        {% block title %}
+            <h1>predictable</h1>
+        {% endblock %}
 
-        <p>Enroll for a newsletter</p>
-        <input type="email" name="email" id="email" />
-        <input type="submit" value="Enroll" onclick="postSubscriber()" />
-        <p><a href="/exit">Stop getting notifications</a></p>
+        {% block form %}
+        <div class="form-step" id="first-step">
+            <p>Enroll for a newsletter</p>
+            <p>Stay aware of crucial moments</p>
+
+            <input type="email" name="email" id="email" />
+            <button onclick="toggleStep('first-step', 'second-step')">
+                Enroll
+            </button>
+
+            <p><a href="/exit">Stop getting notifications</a></p>
+        </div>
+
+        <div class="form-step" id="second-step">
+            <button onclick="toggleStep('first-step', 'second-step')">
+                Back
+            </button>
+            <p>Confirm your e-mail</p>
+
+            <input type="text" name="code" id="code" />
+            <button onclick="">Confirm</button>
+        </div>
+        {% endblock %}
     </div>
     {% endblock %}
 
@@ -50,15 +71,13 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <canvas id="{{currency}}-chart" class="chart"></canvas>
+                    <canvas class="chart" id="{{currency}}-chart"></canvas>
                 </td>
             </tr>
             {% endfor %}
         </table>
     </div>
-    {% endblock %}
 
-    {% block donation %}
     <div class="donation">
         <p>Help us growing up</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -67,9 +86,7 @@
             <input type="submit" name="submit" value="Donate" />
         </form>
     </div>
-    {% endblock %}
 
-    {% block footer %}
     <div class="footer">
         <p>Predictable 2020</p>
     </div>

@@ -1,3 +1,16 @@
+function toggleStep(firstId, secondId) {
+    let first = document.getElementById(firstId);
+    let second = document.getElementById(secondId);
+
+    if (second.style.display === 'none' || second.style.display === '') {
+        first.style.display = 'none';
+        second.style.display = 'block';
+    } else {
+        first.style.display = 'block';
+        second.style.display = 'none';
+    }
+}
+
 function getRadioValue() {
     var radio = document.getElementsByName('table-radio');
     var priceChecked = radio[0].checked;

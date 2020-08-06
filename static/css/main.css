@@ -2,6 +2,14 @@ body {
     font-family: sans-serif;
 }
 
+#second-step {
+    display: none;
+}
+
+#second-exit-step {
+    display: none;
+}
+
 .chart {
     display: none;
 }
