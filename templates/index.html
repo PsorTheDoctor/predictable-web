@@ -58,12 +58,14 @@
             {% for currency in ['bitcoin', 'ethereum', 'ripple', 'tether', 'bitcoin-cash', 'cardano', 'litecoin', 'eos', 'chainlink', 'tezos'] %}
             <tr>
                 <td class="currency-name">{{currency}}</td>
-                {% for idx in range(4) %}
-                    <td class="{{currency}}-values table-values" id="{{currency}}-past-{{idx}}">1.0</td>
+                {% for idx in range(3, 0, -1) %}
+                    <td class="{{currency}}-values" id="{{currency}}-past-{{idx}}">1.0</td>
                 {% endfor %}
 
+                <td class="{{currency}}-values table-mid-col" id="{{currency}}-past-0">1.0</td>
+
                 {% for idx in range(3) %}
-                    <td class="{{currency}}-values table-values" id="{{currency}}-future-{{idx}}">2.0</td>
+                    <td class="{{currency}}-values" id="{{currency}}-future-{{idx}}">2.0</td>
                 {% endfor %}
                 <td>
                     <button onclick="showChart('{{currency}}')">View</button>

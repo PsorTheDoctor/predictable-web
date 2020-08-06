@@ -23,8 +23,6 @@ function drawChart(currency) {
 function showChart(currency) {
     drawChart(currency);
     let chart = document.getElementById(currency + '-chart');
-    console.log(typeof chart.style.display);
-    console.log(chart.style.display);
 
     if (chart.style.display === 'none' || chart.style.display === '') {
         chart.style.display = 'block';

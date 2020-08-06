@@ -4,7 +4,7 @@ function getFormattedDate(dayShift) {
     date.setDate(today + dayShift);
 
     var day = date.getDate();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
     var year = date.getFullYear();
 
     if (day < 10) { day = '0' + day; }
@@ -30,7 +30,7 @@ function getDateLabels(nDaysAgo, nDaysForward) {
 
         day = date.getDate();
         month = date.getMonth();
-        monthLabel = MONTHS[month + 1];
+        monthLabel = MONTHS[month];
         dateLabel = day + ' ' + monthLabel;
         pastDates.push(dateLabel);
     }
@@ -40,7 +40,7 @@ function getDateLabels(nDaysAgo, nDaysForward) {
 
         day = date.getDate();
         month = date.getMonth();
-        monthLabel = MONTHS[month + 1];
+        monthLabel = MONTHS[month];
         dateLabel = day + ' ' + monthLabel;
         futureDates.push(dateLabel);
     }

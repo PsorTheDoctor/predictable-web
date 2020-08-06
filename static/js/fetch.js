@@ -60,6 +60,7 @@ async function sendConfirmationMail() {
 
 async function getPastPrice(_currency, dayShift) {
     let _date = getFormattedDate(dayShift);
+    console.log(_date);
     const options = {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -69,22 +70,19 @@ async function getPastPrice(_currency, dayShift) {
     let { id, currency, date, value } = data;
 
     let price = Math.round(10000 * value) / 10000;
-    document.getElementById(_currency + '-past-' + dayShift).innerHTML = price;
+    document.getElementById(_currency + '-past-' + -dayShift).innerHTML = price;
+    // return price;
 }
 
-function getFuturePrice(currency, dayShift) {
-    return 1.0;
-}
+async function getFuturePrice(_currency, dayShift) {
+//    let _date = getFormattedDate(dayShift);
+//    const options = {
+//        method: 'GET',
+//        headers: {'Content-Type': 'application/json'}
+//    }
+//    let res = await fetch(URL + '/future-prices/' + _currency + '&' + _date, options);
+//    let data = await res.json();
 
-function getChangeInUnits(currency, dayShift) {
-
-}
-
-function getChangeInPercent(currency, dayShift) {
-    return 3.0;
-}
-
-function getPriceHistory(currency, nDaysAgo, nDaysForward) {
-    // TODO! fetch
-    return [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7];
+    // TODO!
+    return 4.0;
 }
