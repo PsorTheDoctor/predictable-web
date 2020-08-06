@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
+@app.route('/home')
 def index():
     return render_template('index.html')
 
@@ -14,4 +15,4 @@ def admin():
 
 
 if __name__ == '__main__':
-    app.run(use_reloader=True, debug=True)
+    app.run(port=5001, use_reloader=True, debug=True)

@@ -1,27 +1,89 @@
+const URL = 'http://127.0.0.1:5000';
+
 const CURRENCIES = [
     'bitcoin', 'ethereum', 'ripple', 'tether', 'bitcoin-cash',
     'cardano', 'litecoin', 'eos', 'chainlink', 'tezos'
-]
+];
 
 const N_CURRENCIES_TO_SHOW = 10;
 const N_PAST_DAYS = 4;
 const N_FUTURE_DAYS = 3;
 
-// TODO fetch!
-function postSubscriber() {
+function getFormattedDate(dayShift) {
+    var date = new Date();
+    var today = date.getDate();
+    date.setDate(today + dayShift);
 
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    if (day < 10) { day = '0' + day; }
+    if (month < 10) { month = '0' + month; }
+
+    return day + '-' + month + '-' + year;
+}
+
+async function getSubscriber(_email) {
+    const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/subscribers/' + _email, options)
+    let data = await res.json();
+    let { id, email, enrolling_date } = data;
+
+//    document.getElementById('col-id').innerHTML = id;
+//    document.getElementById('col-email').innerHTML = email;
+//    document.getElementById('col-date').innerHTML = enrolling_date;
+}
+
+async function getSubscriberList() {
+
+}
+
+async function postSubscriber() {
+    let email = document.getElementById('email').value;
+    let date = getFormattedDate(0);
+    let subscriber = {
+        email: email,
+        enrolling_date: date
+    };
+    const options = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(subscriber)
+    };
+    let res = await fetch(URL + '/subscribers', options);
+    let data = await res.json();
+
+    alert('You have been enrolled successfully!');
 }
 
 function deleteSubscriber() {
 
 }
 
-function getPrice(currency, dayShift) {
+async function getPastPrice(_currency, dayShift) {
+    let _date = getFormattedDate(dayShift);
+    const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/past-prices/' + _currency + '&' + _date, options);
+    let data = await res.json();
+    let { id, currency, date, value } = data;
+
+    let price = Math.round(10000 * value) / 10000;
+    document.getElementById(_currency + '-past-' + dayShift).innerHTML = price;
+}
+
+function getFuturePrice(currency, dayShift) {
     return 1.0;
 }
 
 function getChangeInUnits(currency, dayShift) {
-    return 2.0;
+
 }
 
 function getChangeInPercent(currency, dayShift) {
@@ -41,14 +103,13 @@ function getRadioValue() {
         for (let curr = 0; curr < N_CURRENCIES_TO_SHOW; curr++) {
 
             for (let day = 0; day < N_PAST_DAYS ; day++) {
-                document.getElementById(CURRENCIES[curr] + '-past-' + day)
-                .innerHTML = getPrice(CURRENCIES[curr], -day);
+                getPastPrice(CURRENCIES[curr], day);
                 document.getElementById(CURRENCIES[curr]+ '-past-' + day)
-                .style.color = BLACK;
+                    .style.color = BLACK;
             }
             for (let day = 0; day < N_FUTURE_DAYS; day++) {
                 document.getElementById(CURRENCIES[curr] + '-future-' + day)
-                .innerHTML = getPrice(CURRENCIES[curr], day);
+                .innerHTML = getFuturePrice(CURRENCIES[curr], day);
                 document.getElementById(CURRENCIES[curr]+ '-future-' + day)
                 .style.color = BLACK;
             }
