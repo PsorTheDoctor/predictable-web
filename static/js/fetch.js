@@ -60,7 +60,6 @@ async function sendConfirmationMail() {
 
 async function getPastPrice(_currency, dayShift) {
     let _date = getFormattedDate(dayShift);
-    console.log(_date);
     const options = {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}

@@ -46,12 +46,12 @@
         <table class="table" id="table">
             <tr>
                 <td></td>
-                {% for idx in range(4) %}
-                    <td class="table-header" id="past-day-{{idx}}">past</td>
+                {% for idx in range(4, 0, -1) %}
+                    <td class="table-header" id="past-day-{{idx - 1}}"></td>
                 {% endfor %}
 
                 {% for idx in range(3) %}
-                    <td class="table-header" id="future-day-{{idx}}">future</td>
+                    <td class="table-header" id="future-day-{{idx}}"></td>
                 {% endfor %}
             </tr>
 
@@ -78,6 +78,11 @@
             </tr>
             {% endfor %}
         </table>
+
+        <script>
+            getDaysOfWeek();
+            getRadioValue();
+        </script>
     </div>
 
     <div class="donation">

@@ -10,6 +10,10 @@ body {
     display: none;
 }
 
+#past-day-0 {
+    font-weight: bold;
+}
+
 .table-mid-col {
     font-weight: bold;
 }

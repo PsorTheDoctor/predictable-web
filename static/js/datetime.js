@@ -1,11 +1,11 @@
 function getFormattedDate(dayShift) {
-    var date = new Date();
-    var today = date.getDate();
+    let date = new Date();
+    let today = date.getDate();
     date.setDate(today + dayShift);
 
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
 
     if (day < 10) { day = '0' + day; }
     if (month < 10) { month = '0' + month; }
@@ -13,24 +13,50 @@ function getFormattedDate(dayShift) {
     return day + '-' + month + '-' + year;
 }
 
+function getDaysOfWeek() {
+    let today = new Date();
+    let date = today.getDay();
+
+    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    for (let i = 0; i < N_PAST_DAYS; i++) {
+        let day = date - i;
+        if (day > 6) {
+            day %= 7;
+        } else {
+            while (day < 0) { day += 7; }
+        }
+        document.getElementById('past-day-' + i).innerHTML = DAYS[day];
+    }
+    for (let i = 0; i < N_FUTURE_DAYS; i++) {
+        let day = date + i + 1;
+        if (day > 6) {
+            day %= 7;
+        } else {
+            while (day < 0) { day += 7; }
+        }
+        document.getElementById('future-day-' + i).innerHTML = DAYS[day];
+    }
+}
+
 function getDateLabels(nDaysAgo, nDaysForward) {
-    var today = new Date();
-    var date = new Date();
-    var pastDates = [];
-    var futureDates = [];
-    var day, month, monthLabel, dateLabel;
+    let today = new Date();
+    let date = new Date();
+    let pastDates = [];
+    let futureDates = [];
+    let day, month, monthLabel, dateLabel;
 
     const MONTHS = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
 
-    for (let i = nDaysAgo; i > 0; i--) {
+    for (let i = nDaysAgo + 1; i >= 0; i--) {
         date.setDate(today.getDate() - i + 1);
 
         day = date.getDate();
         month = date.getMonth();
-        monthLabel = MONTHS[month];
+        monthLabel = MONTHS[month + 1];
         dateLabel = day + ' ' + monthLabel;
         pastDates.push(dateLabel);
     }
@@ -40,7 +66,7 @@ function getDateLabels(nDaysAgo, nDaysForward) {
 
         day = date.getDate();
         month = date.getMonth();
-        monthLabel = MONTHS[month];
+        monthLabel = MONTHS[month + 1];
         dateLabel = day + ' ' + monthLabel;
         futureDates.push(dateLabel);
     }
