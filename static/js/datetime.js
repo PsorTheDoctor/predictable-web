@@ -51,12 +51,12 @@ function getDateLabels(nDaysAgo, nDaysForward) {
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
 
-    for (let i = nDaysAgo + 1; i >= 0; i--) {
+    for (let i = nDaysAgo; i > 0; i--) {
         date.setDate(today.getDate() - i + 1);
 
         day = date.getDate();
         month = date.getMonth();
-        monthLabel = MONTHS[month + 1];
+        monthLabel = MONTHS[month];
         dateLabel = day + ' ' + monthLabel;
         pastDates.push(dateLabel);
     }
@@ -66,7 +66,7 @@ function getDateLabels(nDaysAgo, nDaysForward) {
 
         day = date.getDate();
         month = date.getMonth();
-        monthLabel = MONTHS[month + 1];
+        monthLabel = MONTHS[month];
         dateLabel = day + ' ' + monthLabel;
         futureDates.push(dateLabel);
     }
