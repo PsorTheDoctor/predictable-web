@@ -48,7 +48,7 @@ async function deleteSubscriber() {
 
 async function sendConfirmationMail() {
     let email = document.getElementById('email-confirm').value;
-    let code = 123456;
+    const code = 123456;
 
     const options = {
         method: 'GET',
@@ -71,6 +71,19 @@ async function getPastPrice(_currency, dayShift) {
     let price = Math.round(10000 * value) / 10000;
     document.getElementById(_currency + '-past-' + -dayShift).innerHTML = price;
     // return price;
+}
+
+async function getFreshPrice(currency) {
+    const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/price/' + currency, options);
+    let data = await res.json();
+    let { price } = data;
+
+    let _price = Math.round(10000 * price) / 10000;
+    document.getElementById(currency + '-past-0').innerHTML = _price;
 }
 
 async function getFuturePrice(_currency, dayShift) {

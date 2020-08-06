@@ -64,11 +64,14 @@ function getRadioValue() {
     if (priceChecked) {
         for (let curr = 0; curr < N_CURRENCIES_TO_SHOW; curr++) {
 
-            for (let day = N_PAST_DAYS - 1; day >= 0; day--) {
+            for (let day = N_PAST_DAYS - 1; day > 0; day--) {
                 getPastPrice(CURRENCIES[curr], -day);
                 document.getElementById(CURRENCIES[curr]+ '-past-' + day)
                     .style.color = BLACK;
             }
+            getFreshPrice(CURRENCIES[curr]);
+            document.getElementById(CURRENCIES[curr]+ '-past-0').style.color = BLACK;
+
             for (let day = 0; day < N_FUTURE_DAYS; day++) {
 //                document.getElementById(CURRENCIES[curr] + '-future-' + day)
 //                .innerHTML = getFuturePrice(CURRENCIES[curr], day);
