@@ -3,9 +3,9 @@ async function getSubscriber(_email) {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }
-    let res = await fetch(URL + '/subscribers/' + _email, options)
+    let res = await fetch(URL + '/subscribers/' + _email, options);
     let data = await res.json();
-    let { id, email, enrolling_date } = data;
+    let { id, email, since } = data;
 }
 
 async function getSubscriberList() {
@@ -13,12 +13,12 @@ async function getSubscriberList() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }
-    let res = await fetch(URL + '/subscribers', options)
+    let res = await fetch(URL + '/subscribers', options);
     let data = await res.json();
 
     let idx = 0;
     let subscribers = data.map(function(subscriber) {
-        mapSubscribers(idx, subscriber)
+        mapSubscribers(idx, subscriber);
         idx ++;
     });
 }
@@ -28,19 +28,23 @@ async function getSubscribersQty() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }
-    let res = await fetch(URL + '/subscribers', options)
+    let res = await fetch(URL + '/subscribers', options);
     let data = await res.json();
     let qty = data.length;
 
     document.getElementById('sub-qty').innerHTML = qty;
 }
 
-async function postSubscriber() {
-    let email = document.getElementById('email').value;
+async function postSubscriber(emailId, codeId) {
+
+    let email = document.getElementById(emailId).value;
+    let code = document.getElementById(codeId).value;
+
     let date = getFormattedDate(0);
     let subscriber = {
         email: email,
-        enrolling_date: date
+        since: date,
+        code: code
     };
     const options = {
         method: 'POST',
@@ -48,9 +52,13 @@ async function postSubscriber() {
         body: JSON.stringify(subscriber)
     };
     let res = await fetch(URL + '/subscribers', options);
-    let data = await res.json();
 
-    alert('You have been enrolled successfully!');
+    if (res.ok) {
+        let data = await res.json();
+        alert('You have been enrolled successfully!');
+    } else {
+        alert('The code is not valid. Try again.');
+    }
 }
 
 async function deleteSubscriber() {
@@ -65,15 +73,25 @@ async function deleteSubscriber() {
     alert('You turned newsletter off successfully!');
 }
 
-async function sendConfirmationMail() {
-    let email = document.getElementById('email-confirm').value;
-    const code = 123456;
+async function deleteSubscriberByAdmin(email) {
+    const options = {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/subscribers/' + email, options);
+    let data = await res.json();
+
+    alert('You removed ' + email + ' successfully.');
+}
+
+async function sendConfirmationMail(emailId) {
+    let email = document.getElementById(emailId).value;
 
     const options = {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }
-    let res = await fetch(URL + '/mail/' + email + '&' + code, options);
+    let res = await fetch(URL + '/auth/' + email, options);
     let data = await res.json();
 }
 

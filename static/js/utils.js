@@ -1,16 +1,3 @@
-function toggleStep(firstId, secondId) {
-    let first = document.getElementById(firstId);
-    let second = document.getElementById(secondId);
-
-    if (second.style.display === 'none' || second.style.display === '') {
-        first.style.display = 'none';
-        second.style.display = 'block';
-    } else {
-        first.style.display = 'block';
-        second.style.display = 'none';
-    }
-}
-
 function getChangeInUnits(currency, dayShift) {
 
     if (dayShift < 1) {

@@ -6,10 +6,15 @@
         Subscribers: <span id="sub-qty"></span>
     </p>
     <table class="admin-table" id="admin-table">
-
+        <tr>
+            <td class="header">Id</td>
+            <td class="header">E-mail</td>
+            <td class="header">Since</td>
+        </tr>
     </table>
 
     <script>
+        getSubscribersQty();
         getSubscriberList();
     </script>
 {% endblock %}

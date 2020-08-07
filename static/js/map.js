@@ -1,5 +1,5 @@
 function mapSubscribers(idx, subscriber) {
-    let { id, email, enrolling_date } = subscriber;
+    let { id, email, since, code } = subscriber;
 
     if (document.getElementById('admin-row-' + idx) === null) {
 
@@ -19,16 +19,18 @@ function mapSubscribers(idx, subscriber) {
         colEmail.setAttribute('id', 'admin-col-email-' + idx)
         colEmail.innerHTML = email;
 
-        let colDate = document.createElement('td');
-        row.appendChild(colDate);
-        colDate.setAttribute('id', 'admin-col-date-' + idx)
-        colDate.innerHTML = enrolling_date;
+        let colSince = document.createElement('td');
+        row.appendChild(colSince);
+        colSince.setAttribute('id', 'admin-col-since-' + idx)
+        colSince.innerHTML = since;
 
         let colDelete = document.createElement('td');
         row.appendChild(colDelete);
 
         let btn = document.createElement('button');
-        btn.setAttribute('onclick', 'deleteSubscriber(id)');
+        btn.onclick = function() {
+            deleteSubscriberByAdmin(email);
+        };
         btn.innerHTML = 'Delete';
         colDelete.appendChild(btn);
     }

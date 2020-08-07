@@ -14,7 +14,7 @@
             <p>Stay aware of crucial moments</p>
 
             <input type="email" name="email" id="email" />
-            <button onclick="toggleStep('first-step', 'second-step')">
+            <button onclick="secondStep('email', 'first-step')">
                 Enroll
             </button>
 
@@ -22,13 +22,22 @@
         </div>
 
         <div class="form-step" id="second-step">
-            <button onclick="toggleStep('first-step', 'second-step')">
+            <button onclick="goToFirstStep('second-step')">
                 Back
             </button>
             <p>Confirm your e-mail</p>
 
             <input type="text" name="code" id="code" />
-            <button onclick="">Confirm</button>
+            <button onclick="thirdStep('email', 'code', 'second-step')">
+                Confirm
+            </button>
+        </div>
+
+        <div class="form-step" id="third-step">
+            <button onclick="goToFirstStep('third-step')">
+                Back
+            </button>
+            <p>You have been enrolled successfully!</p>
         </div>
         {% endblock %}
     </div>

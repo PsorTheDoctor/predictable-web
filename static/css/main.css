@@ -6,6 +6,10 @@ body {
     display: none;
 }
 
+#third-step {
+    display: none;
+}
+
 #second-exit-step {
     display: none;
 }
@@ -20,4 +24,8 @@ body {
 
 .chart {
     display: none;
+}
+
+.admin-table .header {
+    font-weight: bold;
 }
