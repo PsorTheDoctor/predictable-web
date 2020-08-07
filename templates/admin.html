@@ -2,16 +2,14 @@
 
 {% block body %}
     <a href="/">Home</a>
+    <p>
+        Subscribers: <span id="sub-qty"></span>
+    </p>
+    <table class="admin-table" id="admin-table">
 
-    <button onclick="">
-        demo
-    </button>
-
-    <table>
-        <tr>
-            <td id="col-id"></td>
-            <td id="col-email"></td>
-            <td id="col-date"></td>
-        </tr>
     </table>
+
+    <script>
+        getSubscriberList();
+    </script>
 {% endblock %}

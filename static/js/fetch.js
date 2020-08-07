@@ -6,14 +6,33 @@ async function getSubscriber(_email) {
     let res = await fetch(URL + '/subscribers/' + _email, options)
     let data = await res.json();
     let { id, email, enrolling_date } = data;
-
-//    document.getElementById('col-id').innerHTML = id;
-//    document.getElementById('col-email').innerHTML = email;
-//    document.getElementById('col-date').innerHTML = enrolling_date;
 }
 
 async function getSubscriberList() {
+    const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/subscribers', options)
+    let data = await res.json();
 
+    let idx = 0;
+    let subscribers = data.map(function(subscriber) {
+        mapSubscribers(idx, subscriber)
+        idx ++;
+    });
+}
+
+async function getSubscribersQty() {
+    const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    let res = await fetch(URL + '/subscribers', options)
+    let data = await res.json();
+    let qty = data.length;
+
+    document.getElementById('sub-qty').innerHTML = qty;
 }
 
 async function postSubscriber() {
